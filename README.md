@@ -56,6 +56,10 @@ MIT. See [LICENSE](LICENSE).
 
 ## Changelog
 
+### 0.0.5
+
+- First confirmed working release!
+
 ### 0.0.4
 
 - Another deploy command fix. What's testing?
