@@ -32,6 +32,10 @@ MIT. See [LICENSE](LICENSE).
 
 ## Changelog
 
+### 0.0.4
+
+- Another deploy command fix. What's testing?
+
 ### 0.0.3
 
 - Try to fix the deploy command. Trial and error lol.
