@@ -7,6 +7,7 @@ Run [OpsWorks](http://aws.amazon.com/opsworks/) deployments from
 
 - `key-id` (required) AWS access key ID.
 - `key-secret` (required) AWS secret access key.
+- `stack-id` (required) OpsWorks stack ID.
 - `app-id` (required) OpsWorks app ID.
 - `region` (optional, default `us-east-1`) AWS region.
 - `migrate` (optional, default `false`) Whether to run migrations.
@@ -19,6 +20,7 @@ deploy:
     - grampajoe/opsworks-deploy:
         key-id: $AWS_ACCESS_KEY_ID
         key-secret: $AWS_SECRET_ACCESS_KEY
+        stack-id: $AWS_OPSWORKS_STACK_ID
         app-id: $AWS_OPSWORKS_APP_ID
         migrate: false
 ```
