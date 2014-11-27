@@ -32,6 +32,10 @@ MIT. See [LICENSE](LICENSE).
 
 ## Changelog
 
+### 0.0.3
+
+- Try to fix the deploy command. Trial and error lol.
+
 ### 0.0.2
 
 - Add the stack-id parameter.
