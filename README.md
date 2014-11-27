@@ -59,6 +59,11 @@ MIT. See [LICENSE](LICENSE).
 
 ## Changelog
 
+### 0.1.0
+
+- Explicitly deploy the current commit.
+- Add the `comment` option.
+
 ### 0.0.5
 
 - First confirmed working release!
