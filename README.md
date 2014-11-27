@@ -3,14 +3,12 @@
 Run [OpsWorks](http://aws.amazon.com/opsworks/) deployments from
 [Wercker](http://wercker.com/).
 
-To keep things easy, this uses the [dpl](https://github.com/travis-ci/dpl)
-gem.
-
 ## Options
 
 - `key-id` (required) AWS access key ID.
 - `key-secret` (required) AWS secret access key.
 - `app-id` (required) OpsWorks app ID.
+- `region` (optional, default `us-east-1`) AWS region.
 - `migrate` (optional, default `false`) Whether to run migrations.
 - `wait-until-deployed` (optional, default `false`) Whether to wait for
   deploys to finish before continuing.
