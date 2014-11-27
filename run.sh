@@ -65,4 +65,11 @@ aws opsworks create-deployment \
       \"Args\": {
         \"migrate\": [\"$AWS_OPSWORKS_MIGRATE\"]
       }
+    }" \
+    --custom-json "{
+      \"deploy\": {
+        \"scm\": {
+          \"revision\": \"$WERCKER_GIT_COMMIT\"
+        }
+      }
     }";
