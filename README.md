@@ -1,6 +1,7 @@
 # opsworks-deploy
 
-Run OpsWorks deployments from Wercker.
+Run [OpsWorks](http://aws.amazon.com/opsworks/) deployments from
+[Wercker](http://wercker.com/).
 
 To keep things easy, this uses the [dpl](https://github.com/travis-ci/dpl)
 gem.
