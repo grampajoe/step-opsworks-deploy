@@ -27,6 +27,29 @@ deploy:
         migrate: false
 ```
 
+## Permissions
+
+It's recommended to create an [IAM](http://aws.amazon.com/iam/) user with
+just enough permissions to perform the actions required by this step. The
+following permissions should be enough:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "opsworks:CreateDeployment"
+      ],
+      "Resource": [
+        "arn:aws:opsworks:*:*:stack/your-opsworks-stack-id-here/"
+      ]
+    }
+  ]
+}
+```
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
