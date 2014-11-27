@@ -42,12 +42,6 @@ else
     export AWS_OPSWORKS_MIGRATE="$WERCKER_OPSWORKS_DEPLOY_MIGRATE";
 fi
 
-if [ ! -n "$WERCKER_OPSWORKS_DEPLOY_WAIT_UNTIL_DEPLOYED" ]; then
-    export AWS_OPSWORKS_WAIT="false";
-else
-    export AWS_OPSWORKS_WAIT="$WERCKER_OPSWORKS_DEPLOY_WAIT_UNTIL_DEPLOYED";
-fi
-
 info 'Installing Python...';
 sudo apt-get update -y;
 sudo apt-get install python -y;

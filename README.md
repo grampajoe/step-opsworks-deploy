@@ -10,8 +10,6 @@ Run [OpsWorks](http://aws.amazon.com/opsworks/) deployments from
 - `app-id` (required) OpsWorks app ID.
 - `region` (optional, default `us-east-1`) AWS region.
 - `migrate` (optional, default `false`) Whether to run migrations.
-- `wait-until-deployed` (optional, default `false`) Whether to wait for
-  deploys to finish before continuing.
 
 ## Example
 
@@ -23,7 +21,6 @@ deploy:
         key-secret: $AWS_SECRET_ACCESS_KEY
         app-id: $AWS_OPSWORKS_APP_ID
         migrate: false
-        wait-until-deployed: true
 ```
 
 ## License
