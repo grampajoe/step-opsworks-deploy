@@ -56,7 +56,7 @@ info 'Installing the AWS CLI...';
 sudo pip install awscli;
 
 info 'Deploying...';
-aws opsworks create-deployment
+aws opsworks create-deployment \
     --stack-id $AWS_OPSWORKS_STACK_ID \
     --app-id $AWS_OPSWORKS_APP_ID \
     --command "{
@@ -64,4 +64,4 @@ aws opsworks create-deployment
       \"Args\": {
         \"migrate\": [\"$AWS_OPSWORKS_MIGRATE\"]
       }
-    }"
+    }";
