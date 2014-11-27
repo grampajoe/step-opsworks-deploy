@@ -32,6 +32,10 @@ MIT. See [LICENSE](LICENSE).
 
 ## Changelog
 
+### 0.0.2
+
+- Add the stack-id parameter.
+
 ### 0.0.1
 
 - Initial release!
