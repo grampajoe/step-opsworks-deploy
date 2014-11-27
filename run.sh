@@ -16,6 +16,13 @@ else
     export AWS_SECRET_ACCESS_KEY="$WERCKER_OPSWORKS_DEPLOY_KEY_SECRET";
 fi
 
+if [ ! -n "$WERCKER_OPSWORKS_DEPLOY_STACK_ID" ]; then
+    error 'Please specify a stack-id.';
+    exit 1;
+else
+    export AWS_OPSWORKS_STACK_ID="$WERCKER_OPSWORKS_DEPLOY_STACK_ID";
+fi
+
 if [ ! -n "$WERCKER_OPSWORKS_DEPLOY_APP_ID" ]; then
     error 'Please specify an app-id.';
     exit 1;
@@ -50,6 +57,7 @@ sudo pip install awscli;
 
 info 'Deploying...';
 aws opsworks --region us-east-1 create-deployment
+    --stack-id=$AWS_OPSWORKS_STACK_ID \
     --app-id=$AWS_OPSWORKS_APP_ID \
     --command="{
       \"Name\": \"deploy\",
