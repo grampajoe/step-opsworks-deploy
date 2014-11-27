@@ -1,9 +1,9 @@
 # opsworks-deploy
 
-[![wercker status](https://app.wercker.com/status/be44f2d6fed2b831a4e260b61611191a/s/master "wercker status")](https://app.wercker.com/project/bykey/be44f2d6fed2b831a4e260b61611191a)
-
 Run [OpsWorks](http://aws.amazon.com/opsworks/) deployments from
 [Wercker](http://wercker.com/).
+
+[![wercker status](https://app.wercker.com/status/be44f2d6fed2b831a4e260b61611191a/s/master "wercker status")](https://app.wercker.com/project/bykey/be44f2d6fed2b831a4e260b61611191a)
 
 ## Options
 
