@@ -59,6 +59,10 @@ MIT. See [LICENSE](LICENSE).
 
 ## Changelog
 
+### 0.1.2
+
+- Fix an issue with the default comment.
+
 ### 0.1.1
 
 - Don't pretend to explicitly deploy commits.
