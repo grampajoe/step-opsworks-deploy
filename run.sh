@@ -43,7 +43,7 @@ else
 fi
 
 if [ ! -n "$WERCKER_OPSWORKS_DEPLOY_COMMENT" ]; then
-    export DEPLOY_COMMENT="Wercker deploy by $WERCKER_STARTED_BY: $WERCKER_DEPLOY_URL";
+    export DEPLOY_COMMENT="Wercker deploy by $WERCKER_STARTED_BY.";
 else
     export DEPLOY_COMMENT="$WERCKER_OPSWORKS_DEPLOY_COMMENT";
 fi
