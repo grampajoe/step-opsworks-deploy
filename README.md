@@ -13,6 +13,8 @@ Run [OpsWorks](http://aws.amazon.com/opsworks/) deployments from
 - `app-id` (required) OpsWorks app ID.
 - `region` (optional, default `us-east-1`) AWS region.
 - `migrate` (optional, default `false`) Whether to run migrations.
+- `comment` (optional, default `Deploy commit $WERCKER_GIT_COMMIT by
+  $WERCKER_STARTED_BY from Wercker.`) Comment for the deployment.
 
 ## Example
 
@@ -25,6 +27,7 @@ deploy:
         stack-id: $AWS_OPSWORKS_STACK_ID
         app-id: $AWS_OPSWORKS_APP_ID
         migrate: false
+        comment: "This is $WERCKER_STARTED_BY's fault."
 ```
 
 ## Permissions

@@ -42,6 +42,12 @@ else
     export AWS_OPSWORKS_MIGRATE="$WERCKER_OPSWORKS_DEPLOY_MIGRATE";
 fi
 
+if [ ! -n "$WERCKER_OPSWORKS_DEPLOY_COMMENT" ]; then
+    export DEPLOY_COMMENT="Deploy commit $WERCKER_GIT_COMMIT by $WERCKER_STARTED_BY from Wercker.";
+else
+    export DEPLOY_COMMENT="$WERCKER_OPSWORKS_DEPLOY_COMMENT";
+fi
+
 info 'Installing Python...';
 sudo apt-get update -y;
 sudo apt-get install python -y;
@@ -53,6 +59,7 @@ info 'Deploying...';
 aws opsworks create-deployment \
     --stack-id $AWS_OPSWORKS_STACK_ID \
     --app-id $AWS_OPSWORKS_APP_ID \
+    --comment "$DEPLOY_COMMENT" \
     --command "{
       \"Name\": \"deploy\",
       \"Args\": {
