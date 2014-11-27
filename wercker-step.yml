@@ -1,0 +1,8 @@
+name: opsworks-deploy
+version: 0.0.1
+description: Deploys OpsWorks applications.
+keywords:
+  - deploy
+  - opsworks
+  - aws
+  - amazon
