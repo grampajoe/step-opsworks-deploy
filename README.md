@@ -59,6 +59,10 @@ MIT. See [LICENSE](LICENSE).
 
 ## Changelog
 
+### 0.1.1
+
+- Don't pretend to explicitly deploy commits.
+
 ### 0.1.0
 
 - Explicitly deploy the current commit.
