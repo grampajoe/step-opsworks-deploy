@@ -43,7 +43,7 @@ else
 fi
 
 if [ ! -n "$WERCKER_OPSWORKS_DEPLOY_COMMENT" ]; then
-    export DEPLOY_COMMENT="Deploy commit $WERCKER_GIT_COMMIT by $WERCKER_STARTED_BY from Wercker.";
+    export DEPLOY_COMMENT="Wercker deploy by $WERCKER_STARTED_BY: $WERCKER_DEPLOY_URL";
 else
     export DEPLOY_COMMENT="$WERCKER_OPSWORKS_DEPLOY_COMMENT";
 fi
@@ -64,12 +64,5 @@ aws opsworks create-deployment \
       \"Name\": \"deploy\",
       \"Args\": {
         \"migrate\": [\"$AWS_OPSWORKS_MIGRATE\"]
-      }
-    }" \
-    --custom-json "{
-      \"deploy\": {
-        \"scm\": {
-          \"revision\": \"$WERCKER_GIT_COMMIT\"
-        }
       }
     }";
