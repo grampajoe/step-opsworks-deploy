@@ -1,0 +1,26 @@
+{
+  "name": "step-opsworks-deploy",
+  "version": "1.0.0",
+  "description": "Deploy OpsWorks apps from Wercker.",
+  "main": "deploy.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha tests"
+  },
+  "devDependencies": {
+    "mocha": "2.0.1",
+    "should": "4.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grampajoe/step-opsworks-deploy.git"
+  },
+  "author": "Joe Friedl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/grampajoe/step-opsworks-deploy/issues"
+  },
+  "homepage": "https://github.com/grampajoe/step-opsworks-deploy"
+}
