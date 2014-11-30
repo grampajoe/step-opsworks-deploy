@@ -140,14 +140,14 @@ describe('$ deploy', function() {
 
     cli(options, deployStub);
 
-    deployStub.calledWith(
-      'access-key-id',
-      'secret-access-key',
-      'stack-id',
-      'app-id',
-      'region',
-      true,
-      'comment'
-    ).should.be.ok;
+    deployStub.calledWith({
+      'access-key-id': 'access-key-id',
+      'secret-access-key': 'secret-access-key',
+      'stack-id': 'stack-id',
+      'app-id': 'app-id',
+      'region': 'region',
+      'migrate': true,
+      'comment': 'comment'
+    }).should.be.ok;
   });
 });
