@@ -11,7 +11,8 @@ describe('$ deploy', function() {
         '--secret-access-key=secret-access-key',
         '--stack-id=stack-id',
         '--app-id=app-id'
-      ];
+      ],
+      defaults;
 
   /* Returns an array of options without the ones matched by `expr`.
    */
@@ -21,61 +22,92 @@ describe('$ deploy', function() {
     });
   }
 
+  function itShouldBeRequired() {
+    it('should be required', function() {
+      var flag = this.flag,
+          options = optionsWithout(flag);
+
+      (function() {
+        cli(options);
+      }).should.throw(new RegExp(flag + ' is required'));
+    });
+  }
+
+  function itShouldUseTheEnvironment() {
+    it('should be set by the environment', function() {
+      var options = optionsWithout(this.flag),
+          program;
+      process.env[this.envvar] = 'thing-value'
+
+      program = cli(options, deployStub);
+
+      program[this.name].should.equal('thing-value');
+    });
+  }
+
   beforeEach(function() {
     deployStub.reset();
+
+    // Keep existing env from interfering
+    delete process.env['AWS_ACCESS_KEY_ID'];
+    delete process.env['AWS_SECRET_ACCESS_KEY'];
+
+    defaults = cli(requiredOptions, deployStub);
   });
 
-  describe('required args', function() {
-    it('should include --access-key-id', function() {
-      var options = optionsWithout(/access-key-id/);
-
-      (function() {
-        cli(options);
-      }).should.throw(/access-key-id/);
-    });
-
-    it('should include --secret-access-key', function() {
-      var options = optionsWithout(/secret-access-key/);
-
-      (function() {
-        cli(options);
-      }).should.throw(/secret-access-key/);
-    });
-
-    it('should include --stack-id', function() {
-      var options = optionsWithout(/stack-id/);
-
-      (function() {
-        cli(options);
-      }).should.throw(/stack-id/);
-    });
-
-    it('should include --app-id', function() {
-      var options = optionsWithout(/app-id/);
-
-      (function() {
-        cli(options);
-      }).should.throw(/app-id/);
-    });
-  });
-
-  describe('by default', function() {
-    var program;
-
+  describe('--access-key-id', function() {
     beforeEach(function() {
-      program = cli(requiredOptions, deployStub);
+      this.flag = '--access-key-id';
+      this.name = 'accessKeyId';
+      this.envvar = 'AWS_ACCESS_KEY_ID';
     });
 
-    it('should set --region to us-east-1', function() {
-      program.region.should.equal('us-east-1');
+    itShouldBeRequired();
+    itShouldUseTheEnvironment();
+  });
+
+  describe('--secret-access-key', function() {
+    beforeEach(function() {
+      this.flag = '--secret-access-key';
+      this.name = 'secretAccessKey';
+      this.envvar = 'AWS_SECRET_ACCESS_KEY';
     });
 
-    it('should set --migrate to false', function() {
-      program.migrate.should.equal(false);
+    itShouldBeRequired();
+    itShouldUseTheEnvironment();
+  });
+
+  describe('--stack-id', function() {
+    beforeEach(function() {
+      this.flag = '--stack-id';
     });
 
-    it('should set --comment to ""', function() {
-      program.comment.should.equal('');
+    itShouldBeRequired();
+  });
+
+  describe('--app-id', function() {
+    beforeEach(function() {
+      this.flag = '--app-id';
+    });
+
+    itShouldBeRequired();
+  });
+
+  describe('--region', function() {
+    it('should default to us-east-1', function() {
+      defaults.region.should.equal('us-east-1');
+    });
+  });
+
+  describe('--migrate', function() {
+    it('should default to false', function() {
+      defaults.migrate.should.equal(false);
+    });
+  });
+
+  describe('--comment', function() {
+    it('should default to ""', function() {
+      defaults.comment.should.equal('');
     });
   });
 
