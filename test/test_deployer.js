@@ -30,11 +30,14 @@ describe('Deployer', function() {
     });
   });
 
-  describe('#validateOptions', function() {
+  describe('#cleanOptions', function() {
     it('should do nothing', function() {
-      var deployer = new Deployer();
+      var deployer = new Deployer(),
+          cleaned;
 
-      deployer.validateOptions({'butt': 'fart'});
+      cleaned = deployer.cleanOptions({'butt': 'fart'});
+
+      cleaned.should.eql({'butt': 'fart'});
     });
   });
 

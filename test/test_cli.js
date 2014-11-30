@@ -7,115 +7,23 @@ describe('$ deploy', function() {
       requiredOptions = [
         'node',
         '/path/to/deploy.js',
-        '--access-key-id=access-key-id',
-        '--secret-access-key=secret-access-key',
-        '--stack-id=stack-id',
-        '--app-id=app-id'
-      ],
-      defaults;
-
-  /* Returns an array of options without the ones matched by `expr`.
-   */
-  function optionsWithout(expr) {
-    return requiredOptions.filter(function(arg) {
-      return !arg.match(expr);
-    });
-  }
-
-  function itShouldBeRequired() {
-    it('should be required', function() {
-      var flag = this.flag,
-          options = optionsWithout(flag);
-
-      (function() {
-        cli(options);
-      }).should.throw(new RegExp(flag + ' is required'));
-    });
-  }
-
-  function itShouldUseTheEnvironment() {
-    it('should be set by the environment', function() {
-      var options = optionsWithout(this.flag),
-          program;
-      process.env[this.envvar] = 'thing-value'
-
-      program = cli(options, deployStub);
-
-      program[this.name].should.equal('thing-value');
-    });
-  }
+        'deployer',
+      ];
 
   beforeEach(function() {
-    // Keep existing env from interfering
-    delete process.env['AWS_ACCESS_KEY_ID'];
-    delete process.env['AWS_SECRET_ACCESS_KEY'];
-
-    defaults = cli(requiredOptions, deployStub);
-
     deployStub.reset();
   });
 
-  describe('--access-key-id', function() {
-    beforeEach(function() {
-      this.flag = '--access-key-id';
-      this.name = 'accessKeyId';
-      this.envvar = 'AWS_ACCESS_KEY_ID';
-    });
+  describe('deployer', function() {
+    it('should be required', function() {
+      var options = [
+        'node',
+        '/path/to/deploy.js',
+      ];
 
-    itShouldBeRequired();
-    itShouldUseTheEnvironment();
-  });
-
-  describe('--secret-access-key', function() {
-    beforeEach(function() {
-      this.flag = '--secret-access-key';
-      this.name = 'secretAccessKey';
-      this.envvar = 'AWS_SECRET_ACCESS_KEY';
-    });
-
-    itShouldBeRequired();
-    itShouldUseTheEnvironment();
-  });
-
-  describe('--stack-id', function() {
-    beforeEach(function() {
-      this.flag = '--stack-id';
-    });
-
-    itShouldBeRequired();
-  });
-
-  describe('--app-id', function() {
-    beforeEach(function() {
-      this.flag = '--app-id';
-    });
-
-    itShouldBeRequired();
-  });
-
-  describe('--region', function() {
-    beforeEach(function() {
-      this.flag = '--region';
-      this.name = 'region';
-      this.envvar = 'AWS_DEFAULT_REGION';
-    });
-
-    it('should default to us-east-1', function() {
-      defaults.region.should.equal('us-east-1');
-    });
-
-    itShouldUseTheEnvironment();
-  });
-
-  describe('--migrate', function() {
-    it('should default to false', function() {
-      defaults.migrate.should.equal(false);
-    });
-  });
-
-  describe('--comment', function() {
-    it('should default to ""', function() {
-      defaults.comment.should.equal('');
+      (function() {
+        cli(options, deployStub);
+      }).should.throw(/deployer is required/i);
     });
   });
 
@@ -129,25 +37,20 @@ describe('$ deploy', function() {
     var options = [
           'node',
           '/path/to/deploy.js',
-          '--access-key-id=access-key-id',
-          '--secret-access-key=secret-access-key',
-          '--stack-id=stack-id',
-          '--app-id=app-id',
-          '--region=region',
-          '--migrate',
-          '--comment=comment'
+          'dummy',
+          '--test-arg=wow',
+          '--butt'
         ],
+        deployer,
         args;
 
     cli(options, deployStub);
-    args = deployStub.getCall(0).args[0];
+    deployer = deployStub.getCall(0).args[0];
+    args = deployStub.getCall(0).args[1];
 
-    args.accessKeyId.should.equal('access-key-id');
-    args.secretAccessKey.should.equal('secret-access-key');
-    args.stackId.should.equal('stack-id');
-    args.region.should.equal('region');
-    args.migrate.should.equal(true);
-    args.comment.should.equal('comment');
+    deployer.should.equal('dummy');
+    args.testArg.should.equal('wow');
+    args.butt.should.be.ok;
   });
 
   it('should pass a callback to deploy', function() {
@@ -155,6 +58,6 @@ describe('$ deploy', function() {
 
     cli(requiredOptions, deployStub, callback);
 
-    deployStub.getCall(0).args[1].should.eql(callback);
+    deployStub.getCall(0).args[2].should.eql(callback);
   });
 });
