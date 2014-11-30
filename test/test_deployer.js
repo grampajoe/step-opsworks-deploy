@@ -5,11 +5,12 @@ var should = require('should'),
 describe('Deployer', function() {
   describe('.get', function() {
     it('should return a deployer', function() {
-      var deployer = sinon.stub();
+      function FakeDeployer() {
+      }
 
-      Deployer._deployers['butt'] = deployer;
+      Deployer._deployers['butt'] = FakeDeployer;
 
-      Deployer.get('butt').should.equal(deployer);
+      Deployer.get('butt').should.be.an.instanceOf(FakeDeployer);
     });
 
     it('should throw an error for missing deployers', function() {
