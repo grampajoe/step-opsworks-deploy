@@ -28,6 +28,6 @@
   },
   "homepage": "https://github.com/grampajoe/step-opsworks-deploy",
   "dependencies": {
-    "commander": "^2.5.0"
+    "yargs": "^1.3.3"
   }
 }

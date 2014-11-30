@@ -46,13 +46,13 @@ describe('$ deploy', function() {
   }
 
   beforeEach(function() {
-    deployStub.reset();
-
     // Keep existing env from interfering
     delete process.env['AWS_ACCESS_KEY_ID'];
     delete process.env['AWS_SECRET_ACCESS_KEY'];
 
     defaults = cli(requiredOptions, deployStub);
+
+    deployStub.reset();
   });
 
   describe('--access-key-id', function() {
@@ -127,27 +127,26 @@ describe('$ deploy', function() {
 
   it('should call deploy with passed-in args', function() {
     var options = [
-      'node',
-      '/path/to/deploy.js',
-      '--access-key-id=access-key-id',
-      '--secret-access-key=secret-access-key',
-      '--stack-id=stack-id',
-      '--app-id=app-id',
-      '--region=region',
-      '--migrate=true',
-      '--comment=comment'
-    ];
+          'node',
+          '/path/to/deploy.js',
+          '--access-key-id=access-key-id',
+          '--secret-access-key=secret-access-key',
+          '--stack-id=stack-id',
+          '--app-id=app-id',
+          '--region=region',
+          '--migrate',
+          '--comment=comment'
+        ],
+        passed;
 
     cli(options, deployStub);
+    passed = deployStub.getCall(0).args[0];
 
-    deployStub.calledWith({
-      'access-key-id': 'access-key-id',
-      'secret-access-key': 'secret-access-key',
-      'stack-id': 'stack-id',
-      'app-id': 'app-id',
-      'region': 'region',
-      'migrate': true,
-      'comment': 'comment'
-    }).should.be.ok;
+    passed.accessKeyId.should.equal('access-key-id');
+    passed.secretAccessKey.should.equal('secret-access-key');
+    passed.stackId.should.equal('stack-id');
+    passed.region.should.equal('region');
+    passed.migrate.should.equal(true);
+    passed.comment.should.equal('comment');
   });
 });
