@@ -137,16 +137,24 @@ describe('$ deploy', function() {
           '--migrate',
           '--comment=comment'
         ],
-        passed;
+        args;
 
     cli(options, deployStub);
-    passed = deployStub.getCall(0).args[0];
+    args = deployStub.getCall(0).args[0];
 
-    passed.accessKeyId.should.equal('access-key-id');
-    passed.secretAccessKey.should.equal('secret-access-key');
-    passed.stackId.should.equal('stack-id');
-    passed.region.should.equal('region');
-    passed.migrate.should.equal(true);
-    passed.comment.should.equal('comment');
+    args.accessKeyId.should.equal('access-key-id');
+    args.secretAccessKey.should.equal('secret-access-key');
+    args.stackId.should.equal('stack-id');
+    args.region.should.equal('region');
+    args.migrate.should.equal(true);
+    args.comment.should.equal('comment');
+  });
+
+  it('should pass a callback to deploy', function() {
+    var callback = sinon.stub();
+
+    cli(requiredOptions, deployStub, callback);
+
+    deployStub.getCall(0).args[1].should.eql(callback);
   });
 });
