@@ -94,9 +94,17 @@ describe('$ deploy', function() {
   });
 
   describe('--region', function() {
+    beforeEach(function() {
+      this.flag = '--region';
+      this.name = 'region';
+      this.envvar = 'AWS_DEFAULT_REGION';
+    });
+
     it('should default to us-east-1', function() {
       defaults.region.should.equal('us-east-1');
     });
+
+    itShouldUseTheEnvironment();
   });
 
   describe('--migrate', function() {
