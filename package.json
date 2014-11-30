@@ -4,14 +4,18 @@
   "description": "Deploy OpsWorks apps from Wercker.",
   "main": "deploy.js",
   "directories": {
-    "test": "tests"
+    "test": "test"
   },
   "scripts": {
-    "test": "mocha tests"
+    "test": "mocha"
+  },
+  "bin": {
+    "deploy": "./bin/deploy.js"
   },
   "devDependencies": {
     "mocha": "2.0.1",
-    "should": "4.3.0"
+    "should": "4.3.0",
+    "sinon": "1.12.1"
   },
   "repository": {
     "type": "git",
@@ -22,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/grampajoe/step-opsworks-deploy/issues"
   },
-  "homepage": "https://github.com/grampajoe/step-opsworks-deploy"
+  "homepage": "https://github.com/grampajoe/step-opsworks-deploy",
+  "dependencies": {
+    "commander": "^2.5.0"
+  }
 }
