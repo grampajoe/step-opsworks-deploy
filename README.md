@@ -59,6 +59,10 @@ MIT. See [LICENSE](LICENSE).
 
 ## Changelog
 
+### 0.2.2
+
+- Bugfix: The `migrate` option wasn't passed to OpsWorks correctly.
+
 ### 0.2.1
 
 - Bugfix: The deploy command wasn't found.
