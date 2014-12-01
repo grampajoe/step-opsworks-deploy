@@ -53,10 +53,10 @@ sudo apt-get update -y;
 sudo apt-get install nodejs -y;
 
 info 'Installing the CLI...';
-sudo npm install -g .
+npm install .
 
 info 'Deploying...';
-deploy opsworks \
+node bin/deploy.js opsworks \
     --stack-id $AWS_OPSWORKS_STACK_ID \
     --app-id $AWS_OPSWORKS_APP_ID \
     --comment "$DEPLOY_COMMENT";
