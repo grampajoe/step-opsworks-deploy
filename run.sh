@@ -36,10 +36,10 @@ else
     export AWS_DEFAULT_REGION="$WERCKER_OPSWORKS_DEPLOY_REGION";
 fi
 
-if [ ! -n "$WERCKER_OPSWORKS_DEPLOY_MIGRATE" ]; then
-    export AWS_OPSWORKS_MIGRATE="false";
+if [ "$WERCKER_OPSWORKS_DEPLOY_MIGRATE" = "true" ]; then
+    export AWS_OPSWORKS_MIGRATE="--migrate";
 else
-    export AWS_OPSWORKS_MIGRATE="$WERCKER_OPSWORKS_DEPLOY_MIGRATE";
+    export AWS_OPSWORKS_MIGRATE="";
 fi
 
 if [ ! -n "$WERCKER_OPSWORKS_DEPLOY_COMMENT" ]; then
@@ -59,4 +59,5 @@ info 'Deploying...';
 node bin/deploy.js opsworks \
     --stack-id $AWS_OPSWORKS_STACK_ID \
     --app-id $AWS_OPSWORKS_APP_ID \
+    $AWS_OPSWORKS_MIGRATE \
     --comment "$DEPLOY_COMMENT";
