@@ -60,4 +60,15 @@ describe('$ deploy', function() {
 
     deployStub.getCall(0).args[2].should.eql(callback);
   });
+
+  it('should raise errors from the callback', function() {
+    var callback;
+
+    cli(requiredOptions, deployStub);
+    callback = deployStub.getCall(0).args[2];
+
+    (function() {
+      callback('Error!');
+    }).should.throw('Error!');
+  });
 });

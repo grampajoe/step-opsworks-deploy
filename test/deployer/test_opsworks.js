@@ -1,6 +1,8 @@
 var should = require('should'),
+    sinon = require('sinon'),
     shared = require('./shared'),
-    Deployer = require('../../lib/deployer');
+    Deployer = require('../../lib/deployer'),
+    AWS = require('aws-sdk');
 
 describe('OpsWorksDeployer', function() {
   beforeEach(function() {
@@ -14,6 +16,11 @@ describe('OpsWorksDeployer', function() {
     };
 
     this.defaults = this.deployer.cleanOptions(this.required);
+    this.OpsWorksStub = sinon.stub(AWS, 'OpsWorks');
+  });
+
+  afterEach(function() {
+    AWS.OpsWorks.restore();
   });
 
   shared.itShouldBeADeployer();
@@ -83,6 +90,110 @@ describe('OpsWorksDeployer', function() {
       it('should default to ""', function() {
         this.defaults.comment.should.equal('');
       });
+    });
+  });
+
+  describe('#getApi', function() {
+    beforeEach(function() {
+      this.options = {
+        'accessKeyId': 'access-key-id',
+        'secretAccessKey': 'secret-access-key',
+        'region': 'region',
+      };
+    });
+
+    it('should return an AWS.OpsWorks instance', function() {
+      var api = this.deployer.getApi(this.options);
+
+      api.should.be.an.instanceOf(AWS.OpsWorks);
+    });
+
+    it('should pass in the config', function() {
+      this.deployer.getApi(this.options);
+
+      this.OpsWorksStub.calledWith({
+        'accessKeyId': 'access-key-id',
+        'secretAccessKey': 'secret-access-key',
+        'region': 'region'
+      }).should.be.ok;
+    });
+  });
+
+  describe('#deploy', function() {
+    beforeEach(function() {
+      this.api = sinon.stub();
+      this.api.createDeployment = sinon.stub();
+      sinon.stub(this.deployer, 'getApi').returns(this.api);
+    });
+
+    afterEach(function() {
+      this.deployer.getApi.restore();
+    });
+
+    it('should pass config to getApi', function() {
+      var options = {};
+
+      this.deployer.deploy(options);
+
+      this.deployer.getApi.calledWith(options).should.be.ok;
+    });
+
+    it('should create a deployment', function() {
+      this.deployer.deploy({});
+
+      this.api.createDeployment.called.should.be.ok;
+    });
+
+    it('should set deployment args', function() {
+      var args,
+          params,
+          callback;
+
+      this.deployer.deploy({
+        'stackId': 'stack-id',
+        'appId': 'app-id',
+        'comment': 'comment'
+      });
+
+      args = this.api.createDeployment.getCall(0).args;
+      params = args[0];
+
+      params.should.eql({
+        Command: {
+          Name: 'deploy',
+          Args: {},
+        },
+        StackId: 'stack-id',
+        AppId: 'app-id',
+        Comment: 'comment'
+      });
+    });
+
+    it('should call the callback', function(done) {
+      var args,
+          callback;
+
+      this.deployer.deploy({}, done);
+
+      args = this.api.createDeployment.getCall(0).args;
+      callback = args[1];
+
+      // Pretend createDeployment called its callback
+      callback(null, {DeploymentId: '123'});
+    });
+
+    it('should send errors to the callback', function(done) {
+      function callback(err) {
+        err.should.eql('Whoops!');
+        done();
+      }
+
+      this.deployer.deploy({}, callback);
+
+      args = this.api.createDeployment.getCall(0).args;
+      callback = args[1];
+
+      callback('Whoops!', null);
     });
   });
 });
