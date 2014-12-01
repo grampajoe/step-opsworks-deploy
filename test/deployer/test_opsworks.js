@@ -173,7 +173,7 @@ describe('OpsWorksDeployer', function() {
         Command: {
           Name: 'deploy',
           Args: {
-            'migrate': 'true',
+            'migrate': ['true'],
           },
         },
         StackId: 'stack-id',
