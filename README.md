@@ -59,6 +59,11 @@ MIT. See [LICENSE](LICENSE).
 
 ## Changelog
 
+### 0.2.1
+
+- Bugfix: The deploy command wasn't found.
+- Bugfix: The `migrate` option wasn't passed to OpsWorks.
+
 ### 0.2.0
 
 - Refactor deploy command to allow more flexibility later on.
