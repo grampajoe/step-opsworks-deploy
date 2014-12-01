@@ -59,6 +59,10 @@ MIT. See [LICENSE](LICENSE).
 
 ## Changelog
 
+### 0.2.0
+
+- Refactor deploy command to allow more flexibility later on.
+
 ### 0.1.2
 
 - Fix an issue with the default comment.
