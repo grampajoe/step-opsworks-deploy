@@ -82,7 +82,17 @@ describe('OpsWorksDeployer', function() {
 
     describe('migrate', function() {
       it('should default to false', function() {
-        this.defaults.migrate.should.equal(false);
+        this.defaults.migrate.should.equal('false');
+      });
+
+      it('should be coerced to a string', function() {
+        var options = this.required,
+            cleaned;
+        options.migrate = true;
+
+        cleaned = this.deployer.cleanOptions(options);
+
+        cleaned.migrate.should.equal('true');
       });
     });
 
@@ -152,7 +162,8 @@ describe('OpsWorksDeployer', function() {
       this.deployer.deploy({
         'stackId': 'stack-id',
         'appId': 'app-id',
-        'comment': 'comment'
+        'comment': 'comment',
+        'migrate': 'true'
       });
 
       args = this.api.createDeployment.getCall(0).args;
@@ -161,7 +172,9 @@ describe('OpsWorksDeployer', function() {
       params.should.eql({
         Command: {
           Name: 'deploy',
-          Args: {},
+          Args: {
+            'migrate': 'true',
+          },
         },
         StackId: 'stack-id',
         AppId: 'app-id',
