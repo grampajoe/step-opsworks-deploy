@@ -53,10 +53,10 @@ sudo apt-get update -y;
 sudo apt-get install nodejs -y;
 
 info 'Installing the CLI...';
-npm install .
+npm install $WERCKER_STEP_ROOT
 
 info 'Deploying...';
-node bin/deploy.js opsworks \
+node $WERCKER_STEP_ROOT/bin/deploy.js opsworks \
     --stack-id $AWS_OPSWORKS_STACK_ID \
     --app-id $AWS_OPSWORKS_APP_ID \
     $AWS_OPSWORKS_MIGRATE \
