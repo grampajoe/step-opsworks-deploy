@@ -1,5 +1,1 @@
-box: wercker/nodejs@1.4.0
-build:
-  steps:
-    - npm-install
-    - npm-test
+box: wercker/default
