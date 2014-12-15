@@ -53,7 +53,7 @@ sudo apt-get update -y;
 sudo apt-get install nodejs -y;
 
 info 'Installing the CLI...';
-npm install -g dropper@1.0.0
+npm install -g dropper@1.0.x
 
 info 'Deploying...';
 dropper opsworks \
