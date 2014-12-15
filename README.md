@@ -1,7 +1,8 @@
 # opsworks-deploy
 
 Run [OpsWorks](http://aws.amazon.com/opsworks/) deployments from
-[Wercker](http://wercker.com/).
+[Wercker](http://wercker.com/) using
+[dropper](https://www.npmjs.com/package/dropper).
 
 [![wercker status](https://app.wercker.com/status/be44f2d6fed2b831a4e260b61611191a/s/master "wercker status")](https://app.wercker.com/project/bykey/be44f2d6fed2b831a4e260b61611191a)
 
