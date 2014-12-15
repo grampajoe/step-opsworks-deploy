@@ -60,6 +60,10 @@ MIT. See [LICENSE](LICENSE).
 
 ## Changelog
 
+### 0.3.0
+
+- Use the dropper node package.
+
 ### 0.2.2
 
 - Bugfix: The `migrate` option wasn't passed to OpsWorks correctly.
