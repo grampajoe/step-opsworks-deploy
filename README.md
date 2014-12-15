@@ -60,6 +60,10 @@ MIT. See [LICENSE](LICENSE).
 
 ## Changelog
 
+### 0.3.1
+
+- Bugfix: Use sudo to install dropper.
+
 ### 0.3.0
 
 - Use the dropper node package.
