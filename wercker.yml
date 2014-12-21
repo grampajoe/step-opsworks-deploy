@@ -1,11 +1,6 @@
-box: wercker/ubuntu12.04-webessentials@1.0.4
+box: grampajoe/bats@0.0.1
 build:
   steps:
-    - script:
-        name: install bats
-        code:
-          - git clone https://github.com/sstephenson/bats.git $WERCKER_ROOT/bats
-          - export PATH="$PATH:$WERCKER_ROOT/bats/bin"
     - script:
         name: run tests
         code: bats test
