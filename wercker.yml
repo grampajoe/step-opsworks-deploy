@@ -1,12 +1,11 @@
-box: wercker/default
+box: wercker/ubuntu12.04-webessentials@1.0.4
 build:
   steps:
     - script:
         name: install bats
         code:
-          - sudo add-apt-repository ppa:duggan/bats --yes
-          - sudo apt-get update -qq
-          - sudo apt-get install -qq bats
+          - git clone https://github.com/sstephenson/bats.git $WERCKER_ROOT/bats
+          - export PATH="$PATH:$WERCKER_ROOT/bats/bin"
     - script:
         name: run tests
         code: bats test
