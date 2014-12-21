@@ -54,6 +54,22 @@ following permissions should be enough:
 }
 ```
 
+## Contributing
+
+1. Fork the [GitHub repo](https://github.com/grampajoe/step-opsworks-deploy).
+2. Create a feature branch, e.g. `fun-new-thing`.
+3. Make some changes. Include tests if you can!
+4. Open a pull request.
+
+## Running Tests
+
+The tests for this step require [Bats](https://github.com/sstephenson/bats).
+Install it, then run the tests with:
+
+```bash
+$ bats test
+```
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
