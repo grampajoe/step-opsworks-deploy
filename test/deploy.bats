@@ -162,3 +162,9 @@ teardown() {
 
     assert_dropper_arg not '--wait-for-deploy'
 }
+
+@test 'the current commit should be deployed' {
+    WERCKER_GIT_COMMIT='git-commit-hash-123' run ./deploy.sh
+
+    assert_dropper_arg '--revision git-commit-hash-123'
+}
