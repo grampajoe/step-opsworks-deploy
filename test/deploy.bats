@@ -140,3 +140,25 @@ teardown() {
 
     assert_dropper_arg '--comment test-comment'
 }
+
+@test 'wait-for-deploy defaults to false' {
+    run ./deploy.sh
+
+    assert_dropper_arg not '--wait-for-deploy'
+}
+
+@test 'wait-for-deploy is passed to dropper' {
+    set_config wait-for-deploy 'true'
+
+    run ./deploy.sh
+
+    assert_dropper_arg '--wait-for-deploy'
+}
+
+@test 'setting wait-for-deploy to false removes the argument' {
+    set_config wait-for-deploy 'false'
+
+    run ./deploy.sh
+
+    assert_dropper_arg not '--wait-for-deploy'
+}
