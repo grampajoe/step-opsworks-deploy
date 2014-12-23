@@ -2,5 +2,5 @@
 
 set -e
 
-./install.sh
-./deploy.sh
+$WERCKER_STEP_ROOT/install.sh
+$WERCKER_STEP_ROOT/deploy.sh
