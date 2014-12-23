@@ -81,6 +81,11 @@ MIT. See [LICENSE](LICENSE).
 
 ## Changelog
 
+### 1.0.0
+
+- Add the wait-for-deploy option.
+- Deploy the current commit.
+
 ### 0.3.1
 
 - Bugfix: Use sudo to install dropper.
