@@ -81,6 +81,10 @@ MIT. See [LICENSE](LICENSE).
 
 ## Changelog
 
+### 1.0.1
+
+- Fix paths to the install and deploy scripts.
+
 ### 1.0.0
 
 - Add the wait-for-deploy option.
