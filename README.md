@@ -16,6 +16,8 @@ Run [OpsWorks](http://aws.amazon.com/opsworks/) deployments from
 - `migrate` (optional, default `false`) Whether to run migrations.
 - `comment` (optional, default `Wercker deploy by $WERCKER_STARTED_BY.`)
   Comment for the deployment.
+- `wait-for-deploy` (optional, default `false`) Whether to wait for the deploy
+  to complete.
 
 ## Example
 
@@ -29,6 +31,7 @@ deploy:
         app-id: $AWS_OPSWORKS_APP_ID
         migrate: false
         comment: "This is $WERCKER_STARTED_BY's fault."
+        wait-for-deploy: true
 ```
 
 ## Permissions
@@ -45,6 +48,8 @@ following permissions should be enough:
       "Effect": "Allow",
       "Action": [
         "opsworks:CreateDeployment"
+        "opsworks:DescribeApps",
+        "opsworks:DescribeDeployments"
       ],
       "Resource": [
         "arn:aws:opsworks:*:*:stack/your-opsworks-stack-id-here/"
