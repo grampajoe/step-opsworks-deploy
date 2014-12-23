@@ -57,4 +57,5 @@ dropper opsworks \
     --region $AWS_DEFAULT_REGION \
     $AWS_OPSWORKS_MIGRATE \
     $AWS_OPSWORKS_WAIT_FOR_DEPLOY \
+    --revision $WERCKER_GIT_COMMIT \
     --comment "$DEPLOY_COMMENT";
