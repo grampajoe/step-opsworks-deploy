@@ -81,6 +81,11 @@ MIT. See [LICENSE](LICENSE).
 
 ## Changelog
 
+### 1.0.2
+
+- Bugfix: `info` and `error` are not defined.
+- Check for Node before installing it.
+
 ### 1.0.1
 
 - Fix paths to the install and deploy scripts.

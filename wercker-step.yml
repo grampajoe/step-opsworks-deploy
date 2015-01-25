@@ -1,5 +1,5 @@
 name: opsworks-deploy
-version: 1.0.1
+version: 1.0.2
 description: Deploys OpsWorks applications.
 keywords:
   - deploy
