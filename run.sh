@@ -1,6 +1,4 @@
 #!/bin/sh
 
-set -e
-
-$WERCKER_STEP_ROOT/install.sh
-$WERCKER_STEP_ROOT/deploy.sh
+source $WERCKER_STEP_ROOT/install.sh
+source $WERCKER_STEP_ROOT/deploy.sh
